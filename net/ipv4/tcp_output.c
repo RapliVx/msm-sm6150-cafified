@@ -1720,7 +1720,7 @@ static bool tcp_nagle_check(bool partial, const struct tcp_sock *tp,
  * to send one TSO packet per ms
  */
 u32 tcp_tso_autosize(const struct sock *sk, unsigned int mss_now,
-		     int min_tso_segs)
+			    int min_tso_segs)
 {
 	u32 bytes, segs;
 
