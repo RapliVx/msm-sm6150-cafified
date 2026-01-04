@@ -33,7 +33,7 @@ jobs:
         echo "GCC32_PATH=$GITHUB_WORKSPACE/gcc32" >> $GITHUB_ENV
         
     - name: 📥 Clone kernelSU-Next
-      run: curl -LSs "https://raw.githubusercontent.com/Mr-Morat/KernelSU-Next/susfs/kernel/setup.sh" | bash -s susfs
+      run: curl -LSs "https://raw.githubusercontent.com/Mr-Morat/KernelSU-Next/legacy/kernel/setup.sh" | bash -s legacy
       
     - name: 📅 Set BUILD DATE
       run: |
