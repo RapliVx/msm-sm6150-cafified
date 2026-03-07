@@ -40,19 +40,17 @@ struct uts_namespace init_uts_ns = {
 };
 EXPORT_SYMBOL_GPL(init_uts_ns);
 
-/* FIXED STRINGS! Don't touch! 
-custom banner by Exotic GANK */
-#ifndef BUILD_DATE
-#define BUILD_DATE "47° Brutalist Oblivion"
-#endif
-
+/* FIXED STRINGS! Don't touch! */
 const char linux_banner[] =
-    "Linux version " UTS_RELEASE " (" LINUX_COMPILE_BY "@" LINUX_COMPILE_HOST ")\n"
-    "Compiled with Morat Engine LLD 19.0.0\n"
-    "Crafted in " BUILD_DATE "\n";
+	"Linux version " UTS_RELEASE " (" LINUX_COMPILE_BY "@"
+	LINUX_COMPILE_HOST ") (" LINUX_COMPILER ") " UTS_VERSION "\n";
+
+const char *linux_banner_ptr = linux_banner;
+EXPORT_SYMBOL_GPL(linux_banner_ptr);
 
 const char linux_proc_banner[] =
-    "%s version %s"
-    " (" LINUX_COMPILE_BY "@" LINUX_COMPILE_HOST ") "
-    "Compiled with Morat Engine LLD 19.0.0 "
-    "Crafted in " BUILD_DATE "\n";
+	"%s version %s"
+	" (" LINUX_COMPILE_BY "@" LINUX_COMPILE_HOST ")"
+	" (" LINUX_COMPILER ") %s\n";
+
+BUILD_SALT;
