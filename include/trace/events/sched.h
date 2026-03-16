@@ -1639,6 +1639,35 @@ TRACE_EVENT(sched_preempt_disable,
 				__entry->caddr2, __entry->caddr3)
 );
 
+TRACE_EVENT(sched_enq_deq_task,
+
+	TP_PROTO(struct task_struct *p, int enqueue, unsigned int cpumask),
+
+	TP_ARGS(p, enqueue, cpumask),
+
+	TP_STRUCT__entry(
+		__array(	char,	comm,	TASK_COMM_LEN	)
+		__field(	pid_t,	pid			)
+		__field(	int,	priority		)
+		__field(	int,	cpu			)
+		__field(	int,	enqueue			)
+		__field(	unsigned int,	cpumask		)
+	),
+
+	TP_fast_assign(
+		memcpy(__entry->comm, p->comm, TASK_COMM_LEN);
+		__entry->pid		= p->pid;
+		__entry->priority	= p->prio;
+		__entry->cpu		= task_cpu(p);
+		__entry->enqueue	= enqueue;
+		__entry->cpumask	= cpumask;
+	),
+
+	TP_printk("cpu=%d pid=%d comm=%s prio=%d enqueue=%d cpumask=0x%x",
+		__entry->cpu, __entry->pid, __entry->comm, __entry->priority,
+		__entry->enqueue, __entry->cpumask)
+);
+
 #endif /* _TRACE_SCHED_H */
 
 /* This part must be outside protection */
